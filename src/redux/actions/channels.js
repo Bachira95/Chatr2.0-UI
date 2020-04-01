@@ -12,6 +12,9 @@ export const fetchChannels = () => async dispatch => {
   }
 };
 
+/**
+ * Clean up "dead" code and console logs
+ */
 export const createChannel = newChannel => async dispatch => {
   try {
     //bad request
@@ -26,10 +29,15 @@ export const createChannel = newChannel => async dispatch => {
     });
     // closeModal();
   } catch (err) {
+    /**
+     * Because this error is part of a form,
+     * you should be passing your errors to the errors reducer
+     * and then displaying them on the for,
+     */
     // dispatch({
     //   type: SET_ERRORS,
     //   payload: err.response.data
     // });
-    console.log(err);
+    console.error(err);
   }
 };

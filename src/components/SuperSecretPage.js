@@ -2,6 +2,11 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
+/**
+ * This page was only every supposed to be a test for authentication
+ * Make it more useful or redirect the user to somewhere more useful
+ */
+
 const SuperSecretPage = ({ user }) => {
   // if (user) return <Redirect to="/private" />;
 

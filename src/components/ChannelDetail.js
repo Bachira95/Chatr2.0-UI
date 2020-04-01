@@ -14,7 +14,7 @@ class ChannelDetail extends Component {
   }
 
   state = {
-    username: "",
+    username: "", // <-- the backend doesn't need a username so this shouldn't be here
     message: ""
     // channel: [this.props.channel.id]
   };
@@ -47,6 +47,7 @@ class ChannelDetail extends Component {
         <div className="scrollbar square scrollbar-lady-lips thin">
           <div className="force-overflow">{messages}</div>
         </div>
+        {/* Take this form and its state and submit handler into a separate component */}
         <form onSubmit={this.submitMessage}>
           <div className="input-group mb-3">
             <div className="input-group-prepend"></div>
@@ -80,6 +81,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    // maybe `getMessages`?
     getChannel: channelID => dispatch(fetchChannelDetail(channelID)),
     sendMessage: (channelID, newMessage) =>
       dispatch(sendMessage(channelID, newMessage))

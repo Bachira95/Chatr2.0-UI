@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { login, signup } from "../redux/actions";
 import { connect } from "react-redux";
-import SuperSecretPage from "./SuperSecretPage";
+import SuperSecretPage from "./SuperSecretPage"; // <-- "dead" import
+
 class RegistationForm extends Component {
   state = {
     username: "",
@@ -15,11 +16,6 @@ class RegistationForm extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    /*
-     * This code can be simplified and shortened by combining
-     * the two actions into one.
-     * See the authentications.js action file for more details on this.
-     */
     if (this.props.match.url.substring(1) === "login")
       this.props.login(this.state);
     else this.props.signup(this.state);
