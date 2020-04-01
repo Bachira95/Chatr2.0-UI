@@ -1,23 +1,28 @@
 import React, { Component } from "react";
-import { fetchChannelDetail, sendMessage } from "../redux/actions";
+import { fetchMessages, sendMessage } from "../redux/actions";
 // Components
 
 import { connect } from "react-redux";
 
 class ChannelDetail extends Component {
+  state = {
+    message: ""
+  };
   componentDidMount() {
-    this.props.getChannel(this.props.match.params.channelID);
+    this.myInterval = setInterval(() => {
+      this.props.getMessages(this.props.match.params.channelID);
+    }, 3000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.myInterval);
   }
   componentDidUpdate(preProps) {
-    if (this.props.match.params.channelID !== preProps.match.params.channelID)
-      this.props.getChannel(this.props.match.params.channelID);
+    if (this.props.match.params.channelID !== preProps.match.params.channelID) {
+      this.props.getMessages(this.props.match.params.channelID);
+      clearInterval(this.myInterval);
+    }
   }
 
-  state = {
-    username: "",
-    message: ""
-    // channel: [this.props.channel.id]
-  };
   ChangeHandler = e => this.setState({ [e.target.name]: e.target.value });
 
   submitMessage = event => {
@@ -28,24 +33,51 @@ class ChannelDetail extends Component {
     }
   };
   render() {
-    // const title = this.props.match.params.channelTitle;
     const { channel } = this.props;
     let messages = "";
-    if (channel) console.log(channel);
+
     if (channel) {
       messages = channel.map(msg => (
-        <div className="card">
-          <div className="card-body " key={msg.id}>
-            {msg.username} : {msg.message}
-          </div>
+        <div>
+          {" "}
+          <br></br>
+          {this.props.user.username !== msg.username ? (
+            <div
+              className="speech-bubble-ds"
+              style={{ width: 500, marginLeft: "270px" }}
+            >
+              <div className="card-body" key={msg.id}>
+                {msg.username} : {msg.message}
+              </div>
+            </div>
+          ) : (
+            <div
+              className="speech-bubble-ds-other"
+              style={{ width: 500, marginLeft: "300px" }}
+            >
+              <div className="card-body" key={msg.id}>
+                {msg.username} : {msg.message}
+              </div>
+            </div>
+          )}
         </div>
       ));
     }
 
     return (
       <div className="channel">
-        <div className="scrollbar square scrollbar-lady-lips thin">
-          <div className="force-overflow">{messages}</div>
+        <h1 className="">## {this.props.match.params.channelName}</h1>
+        <div
+          style={{
+            overflowY: "scroll",
+            position: "relative",
+            maxHeight: "500px",
+            marginTop: "15px",
+            opacity: 0.9
+          }}
+        >
+          {messages}
+          <br></br>
         </div>
         <form onSubmit={this.submitMessage}>
           <div className="input-group mb-3">
@@ -54,16 +86,20 @@ class ChannelDetail extends Component {
               type="text"
               className="form-control"
               name="message"
+              style={{
+                maxWidth: "25rem",
+                height: "50px",
+                marginLeft: "300px",
+                position: "center"
+              }}
               onChange={this.ChangeHandler}
               value={this.state.message}
             />
-
-            <button
-              className="btn btn-info"
-              type="button"
-              onClick={this.submitMessage}
-            >
-              Send
+            <button className="btn" type="button" onClick={this.submitMessage}>
+              <img
+                src="https://img.icons8.com/nolan/48/filled-sent.png"
+                alt="send"
+              />
             </button>
           </div>
         </form>
@@ -74,13 +110,14 @@ class ChannelDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    channel: state.channelState.channel
+    channel: state.channelState.channel,
+    user: state.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getChannel: channelID => dispatch(fetchChannelDetail(channelID)),
+    getMessages: channelID => dispatch(fetchMessages(channelID)),
     sendMessage: (channelID, newMessage) =>
       dispatch(sendMessage(channelID, newMessage))
   };

@@ -1,16 +1,18 @@
-import { SET_CHANNEL_DETAIL, SEND_MESSAGE, SET_ERRORS } from "./actionTypes";
+import { SEND_MESSAGE, SET_MESSAGES } from "./actionTypes";
+import { setErrors } from "./errors";
 
 import instance from "./instance";
-export const fetchChannelDetail = channelID => async dispatch => {
+export const fetchMessages = channelID => async dispatch => {
   try {
     const res = await instance.get(`channels/${channelID}/`);
     const channel = res.data;
     dispatch({
-      type: SET_CHANNEL_DETAIL,
+      type: SET_MESSAGES,
       payload: channel
     });
   } catch (err) {
     console.error(err);
+    dispatch(setErrors(err));
   }
 };
 
@@ -18,15 +20,13 @@ export const sendMessage = (channelID, newMessage) => async dispatch => {
   try {
     const res = await instance.post(`channels/${channelID}/send/`, newMessage);
     const message = res.data;
-    console.log(message);
+    // dispatch(setErrors());
     dispatch({
       type: SEND_MESSAGE,
       payload: message
     });
   } catch (err) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: err.response.data
-    });
+    console.error(err);
+    dispatch(setErrors(err));
   }
 };

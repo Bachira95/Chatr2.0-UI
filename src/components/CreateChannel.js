@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { createChannel, setErrors } from "../redux/actions";
+import { createChannel, setErrors, fetchChannels } from "../redux/actions";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { Redirect } from "react-router-dom";
 class CreateChannel extends Component {
   state = {
     name: ""
@@ -10,18 +13,17 @@ class CreateChannel extends Component {
     event.preventDefault();
     if (this.state.name) {
       this.props.createChannel(this.state);
+
+      this.props.getChannels();
       this.setState({ name: "" });
     }
   };
-  //onSubmit={this.submitChannel}
+
   render() {
     return (
       <div className="container">
         <form onSubmit={this.submitChannel}>
           <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text">Name</span>
-            </div>
             <input
               type="text"
               className="form-control"
@@ -30,29 +32,21 @@ class CreateChannel extends Component {
               value={this.state.name}
             />
 
-            <button
-              className="btn btn-info"
-              type="button"
-              onClick={this.submitChannel}
-            >
-              + New Channel
+            <button onClick={this.submitChannel}>
+              <FontAwesomeIcon icon={faPlusCircle} />
             </button>
           </div>
-          {/* <input type="submit" onSubmit={this.submitChannel} /> */}
         </form>
       </div>
     );
   }
 }
-// const mapStateToProps = state => {
-//   return {
-//     errors: state.errors
-//   };
-// };
+
 const mapDispatchToProps = dispatch => {
   return {
     createChannel: newChannel => dispatch(createChannel(newChannel)),
-    setErrors: () => dispatch(setErrors())
+    setErrors: () => dispatch(setErrors()),
+    getChannels: () => dispatch(fetchChannels())
   };
 };
 

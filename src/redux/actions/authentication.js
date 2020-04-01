@@ -2,7 +2,7 @@ import decode from "jwt-decode";
 
 import instance from "./instance";
 
-import { SET_CURRENT_USER } from "./actionTypes";
+import { SET_CURRENT_USER, SET_ERRORS } from "./actionTypes";
 
 import { setErrors } from "./errors";
 import { fetchChannels } from "./channels";
@@ -11,13 +11,11 @@ export const checkForExpiredToken = () => dispatch => {
   const token = localStorage.getItem("token");
   if (token) {
     const currentTime = Date.now() / 1000;
-    //decode token and get user information
     const user = decode(token);
-    //chek token expiration
+
     if (user.exp >= currentTime) {
-      //setAuthHeader
       setAuthHeader(token);
-      //set the user
+
       dispatch({
         type: SET_CURRENT_USER,
         payload: user
@@ -39,14 +37,6 @@ const setAuthHeader = token => {
   else delete instance.defaults.headers.Authorization;
 };
 
-/*
- *
- * You can combine the login() and signup() actions into a single action
- * that receives a type.
- * This way you can avoid a lot of unnecessary logic and repetitive code.
- *
- */
-
 export const login = userData => async dispatch => {
   try {
     const response = await instance.post("login/", userData);
@@ -57,6 +47,10 @@ export const login = userData => async dispatch => {
     dispatch({
       type: SET_CURRENT_USER,
       payload: user
+    });
+    dispatch({
+      type: SET_ERRORS,
+      payload: {}
     });
 
     dispatch(fetchChannels());
@@ -78,6 +72,10 @@ export const signup = userData => async dispatch => {
       type: SET_CURRENT_USER,
       payload: user
     });
+    dispatch({
+      type: SET_ERRORS,
+      payload: {}
+    });
     dispatch(fetchChannels());
   } catch (error) {
     console.error("some thing is wrong!");
@@ -95,4 +93,4 @@ export const logout = () => {
   };
 };
 
-const setCurrentUser = token => {};
+// const setCurrentUser = token => {};

@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import { connect } from "react-redux";
+
 // Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,15 +12,21 @@ import {
 
 // Components
 import ChannelNavLink from "./ChannelNavLink";
+import CreateChannel from "../CreateChannel";
 
 class SideNav extends React.Component {
-  state = { collapsed: false };
+  state = { collapsed: false, toggle: false };
+  toggelHandler() {
+    this.setState({ toggle: true });
+  }
 
   render() {
-    const channelLinks = this.props.channels.map(channel => (
-      <ChannelNavLink key={channel.name} channel={channel} />
-    ));
-    console.log(this.props.channels);
+    let channelLinks = "";
+    if (this.props.channels)
+      channelLinks = this.props.channels.map(channel => (
+        <ChannelNavLink key={channel.id} channel={channel} />
+      ));
+    console.log(channelLinks);
     return (
       <div>
         {this.props.user && (
@@ -29,10 +36,20 @@ class SideNav extends React.Component {
               data-toggle="tooltip"
               data-placement="right"
             >
-              <Link className="nav-link heading" to="/createChannel">
-                <span className="nav-link-text mr-2">Channels</span>
-                <FontAwesomeIcon icon={faPlusCircle} />
-              </Link>
+              <span
+                className="nav-link heading"
+                onClick={() => this.toggelHandler()}
+              >
+                {this.state.toggle ? (
+                  <CreateChannel />
+                ) : (
+                  <div>
+                    {" "}
+                    <span className="nav-link-text mr-2">Channels</span>
+                    <FontAwesomeIcon icon={faPlusCircle} />
+                  </div>
+                )}
+              </span>
             </li>
 
             {channelLinks}
@@ -65,5 +82,10 @@ const mapStateToProps = state => {
     channels: state.channelsState.channels
   };
 };
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     getChannels: () => dispatch(fetchChannels())
+//   };
+// };
 
 export default connect(mapStateToProps)(SideNav);

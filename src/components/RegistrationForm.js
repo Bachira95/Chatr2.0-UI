@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { login, signup } from "../redux/actions";
 import { connect } from "react-redux";
-import SuperSecretPage from "./SuperSecretPage";
+
 class RegistationForm extends Component {
   state = {
     username: "",
@@ -15,11 +15,6 @@ class RegistationForm extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    /*
-     * This code can be simplified and shortened by combining
-     * the two actions into one.
-     * See the authentications.js action file for more details on this.
-     */
     if (this.props.match.url.substring(1) === "login")
       this.props.login(this.state);
     else this.props.signup(this.state);
@@ -37,13 +32,7 @@ class RegistationForm extends Component {
               ? "Login to send messages"
               : "Register an account"}
           </h5>
-          {/* {!!this.props.errors.length && (
-            <div className="alert alert-danger" role="alert">
-              {this.props.errors.map(error => (
-                <p key={error}>{error}</p>
-              ))}
-            </div>
-          )} */}
+
           <form onSubmit={this.submitHandler}>
             <div className="form-group ">
               <input
@@ -91,6 +80,5 @@ const mapStateToProps = ({ user, errors }) => ({ user, errors });
 const mapDispatchToProps = dispatch => ({
   login: userData => dispatch(login(userData)),
   signup: userData => dispatch(signup(userData))
-  // setErrors: () => dispatch(setErrors())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(RegistationForm);

@@ -1,12 +1,10 @@
-import { SET_CHANNEL_DETAIL, SEND_MESSAGE } from "../actions/actionTypes";
+import { SET_MESSAGES, SEND_MESSAGE } from "../actions/actionTypes";
 
-const initialState = {
-  channel: null
-};
+const initialState = [];
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_CHANNEL_DETAIL:
+    case SET_MESSAGES:
       return {
         ...state,
         channel: action.payload

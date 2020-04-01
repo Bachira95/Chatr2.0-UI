@@ -4,5 +4,5 @@ export const SET_ERRORS = "SET_ERRORS";
 export const SET_CHANNELS = "SET_CHANNELS";
 export const CREATE_CHANNEL = "CREATE_CHANNEL";
 
-export const SET_CHANNEL_DETAIL = "SET_CHANNEL_DETAIL";
+export const SET_MESSAGES = "SET_MESSAGES ";
 export const SEND_MESSAGE = "SEND_MESSAGE";
