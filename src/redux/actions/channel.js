@@ -1,6 +1,15 @@
 import { SET_CHANNEL_DETAIL, SEND_MESSAGE, SET_ERRORS } from "./actionTypes";
 
 import instance from "./instance";
+
+/**
+ * Cleanup:
+ *
+ * - fetchMessages
+ * - SET_MESSAGES
+ * - import and use setErrors instead of manually dispatching errors
+ */
+
 export const fetchChannelDetail = channelID => async dispatch => {
   try {
     const res = await instance.get(`channels/${channelID}/`);

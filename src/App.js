@@ -27,6 +27,7 @@ class App extends Component {
           <Route path="/(login|signup)" component={RegistrationForm} />
           <Route path="/private" component={SuperSecretPage} />
           <Route path="/createChannel" component={CreateChannel} />
+          {/* Try to make this route include the channel name - it's better UX in the frontend */}
           <Route path="/channels/:channelID" component={ChannelDetail} />
           <Redirect to="/welcome" />
         </Switch>

@@ -1,24 +1,24 @@
 import { SET_CHANNELS, CREATE_CHANNEL } from "../actions/actionTypes";
 
+/**
+ * Cleanup:
+ *
+ * - Don't commit "dead" code
+ * - Don't commit console logs
+ * - const initialState = []
+ */
+
 // const initialState = {
 //   listChannel: [
 //     { title: "all", messages: ["message1", "msg2", "msg3"] },
 //     { title: "CODED", messages: ["message1", "msg2", "msg3"] }
 //   ]
 // };
+
 const initialState = {
   channels: []
   // loading: true
 };
-
-/*
- *
- * You have to receives the list of channels from the backend API.
- * So the two cards you have for channels that are in the Done list
- * should be moved back to Doing or Backlog.
- * Look at the Project Description on Warehouse for details on this.
- *
- */
 
 const reducer = (state = initialState, action) => {
   // console.log(action.payload);

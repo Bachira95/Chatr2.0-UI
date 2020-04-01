@@ -1,5 +1,13 @@
 import { SET_CHANNEL_DETAIL, SEND_MESSAGE } from "../actions/actionTypes";
 
+/**
+ * I think with a little renaming and restructuring, you can make this reducer cleaner:
+ *
+ *  - const initialState = []
+ *  - SET_MESSAGES instead of SET_CHANNEL_DETAIL
+ *  - etc
+ */
+
 const initialState = {
   channel: null
 };

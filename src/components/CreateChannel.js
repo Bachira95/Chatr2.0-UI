@@ -9,7 +9,7 @@ class CreateChannel extends Component {
   submitChannel = event => {
     event.preventDefault();
     if (this.state.name) {
-      this.props.createChannel(this.state);
+      this.props.createChannel(this.state); // <-- you should send history so you can redirect the user after making a channel
       this.setState({ name: "" });
     }
   };
