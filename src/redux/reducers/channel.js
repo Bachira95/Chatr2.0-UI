@@ -7,7 +7,7 @@ const reducer = (state = initialState, action) => {
     case SET_MESSAGES:
       return {
         ...state,
-        channel: action.payload
+        channel: action.payload // Rename this property from channel to messages, it's not a channel object, it's a list of messages.
       };
 
     case SEND_MESSAGE:

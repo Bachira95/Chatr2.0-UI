@@ -27,6 +27,8 @@ class App extends Component {
           <Route path="/(login|signup)" component={RegistrationForm} />
           <Route path="/private" component={SuperSecretPage} />
           <Route path="/createChannel" component={CreateChannel} />
+
+          {/* For better UX, don't pass the channelID in the URL, only the channelName */}
           <Route
             path="/channels/:channelID/:channelName"
             component={ChannelDetail}
