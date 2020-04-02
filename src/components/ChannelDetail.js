@@ -20,9 +20,11 @@ class ChannelDetail extends Component {
     if (this.props.match.params.channelID !== preProps.match.params.channelID) {
       this.props.getMessages(this.props.match.params.channelID);
       clearInterval(this.myInterval);
+      // don't you want to set a new interval here after clearing the old one?
     }
   }
 
+  // changeHandler not ChangeHandler
   ChangeHandler = e => this.setState({ [e.target.name]: e.target.value });
 
   submitMessage = event => {
@@ -37,6 +39,10 @@ class ChannelDetail extends Component {
     let messages = "";
 
     if (channel) {
+      // add the unique key to the top div in this .map()
+      // also, put this JSX into a separate Message component.
+      // this condition below can be simplified since most of
+      // the JSX in both cases is the same.
       messages = channel.map(msg => (
         <div>
           {" "}
