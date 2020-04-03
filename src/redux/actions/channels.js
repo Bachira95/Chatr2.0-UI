@@ -1,4 +1,4 @@
-import { SET_CHANNELS, CREATE_CHANNEL } from "./actionTypes";
+import { SET_CHANNELS, ADD_CHANNEL } from "./actionTypes";
 import { setErrors } from "./errors";
 import instance from "./instance";
 
@@ -18,7 +18,7 @@ export const createChannel = newChannel => async dispatch => {
     const channel = res.data;
 
     dispatch({
-      type: CREATE_CHANNEL,
+      type: ADD_CHANNEL,
       payload: channel
     });
   } catch (err) {

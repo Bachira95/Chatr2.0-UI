@@ -32,33 +32,36 @@ class RegistationForm extends Component {
               ? "Login to send messages"
               : "Register an account"}
           </h5>
-
           <form onSubmit={this.submitHandler}>
             <div className="form-group ">
-              <input
-                className={`form-control ${errors.username && "is-invalid"}`}
-                type="text"
-                placeholder="Username"
-                name="username"
-                onChange={this.changeHandler}
-              />
-              <div className="invalid-feedback">{errors.username}</div>
+              <div className="module-border-wrap rounded-pill">
+                <input
+                  className={`form-control rounded-pill ${errors.username &&
+                    "is-invalid"}`}
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                  onChange={this.changeHandler}
+                />
+                <div className="invalid-feedback">{errors.username}</div>
+              </div>
             </div>
             <div className="form-group">
-              <input
-                className={`form-control ${errors.password && "is-invalid"}`}
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={this.changeHandler}
-              />
-              <div className="invalid-feedback">{errors.password}</div>
+              <div className="module-border-wrap rounded-pill">
+                <input
+                  className={`form-control rounded-pill  ${errors.password &&
+                    "is-invalid"}`}
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  onChange={this.changeHandler}
+                />
+                <div className="invalid-feedback">{errors.password}</div>
+              </div>
             </div>
-            <input
-              className="btn btn-primary"
-              type="submit"
-              value={type.replace(/^\w/, c => c.toUpperCase())}
-            />
+            <button className="btn" type="submit">
+              <img src="https://img.icons8.com/nolan/64/enter-2.png" />
+            </button>
           </form>
         </div>
         <div className="card-footer">

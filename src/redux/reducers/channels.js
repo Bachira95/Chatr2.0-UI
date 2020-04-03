@@ -1,4 +1,4 @@
-import { SET_CHANNELS, CREATE_CHANNEL } from "../actions/actionTypes";
+import { SET_CHANNELS, ADD_CHANNEL } from "../actions/actionTypes";
 
 const initialState = [];
 const reducer = (state = initialState, action) => {
@@ -8,7 +8,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         channels: action.payload
       };
-    case CREATE_CHANNEL:
+    case ADD_CHANNEL:
       return {
         ...state,
         channels: [action.payload].concat(state.channels)

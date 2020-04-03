@@ -1,20 +1,28 @@
-import { SET_MESSAGES, SEND_MESSAGE } from "../actions/actionTypes";
+import {
+  SET_MESSAGES,
+  ADD_MESSAGE,
+  CLEAR_MESSAGES
+} from "../actions/actionTypes";
 
-const initialState = [];
+const initialState = { messages: [] };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MESSAGES:
       return {
         ...state,
-        channel: action.payload
+        messages: [...state.messages, ...action.payload]
       };
-
-    case SEND_MESSAGE:
+    case CLEAR_MESSAGES:
+      return {
+        ...state,
+        messages: []
+      };
+    case ADD_MESSAGE:
       const message = action.payload;
       return {
         ...state,
-        channel: [...state.channel, message]
+        messages: [...state.messages, message]
       };
 
     default:

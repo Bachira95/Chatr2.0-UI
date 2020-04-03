@@ -3,23 +3,34 @@ import { createChannel, setErrors, fetchChannels } from "../redux/actions";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { Redirect } from "react-router-dom";
+
 class CreateChannel extends Component {
   state = {
-    name: ""
+    name: "",
+    toggal: false
   };
-  ChangeHandler = e => this.setState({ [e.target.name]: e.target.value });
+  // ADD imgURL whrn create channel
+  changeHandler = e => this.setState({ [e.target.name]: e.target.value });
   submitChannel = event => {
     event.preventDefault();
     if (this.state.name) {
-      this.props.createChannel(this.state);
+      this.props.createChannel({ name: this.state.name });
 
       this.props.getChannels();
       this.setState({ name: "" });
+      this.setState({ toggal: true });
     }
   };
 
   render() {
+    if (this.state.toggal)
+      return (
+        <div>
+          {" "}
+          <span className="nav-link-text mr-2">Channels</span>
+          <FontAwesomeIcon icon={faPlusCircle} />
+        </div>
+      );
     return (
       <div className="container">
         <form onSubmit={this.submitChannel}>
@@ -28,7 +39,7 @@ class CreateChannel extends Component {
               type="text"
               className="form-control"
               name="name"
-              onChange={this.ChangeHandler}
+              onChange={this.changeHandler}
               value={this.state.name}
             />
 
@@ -45,7 +56,6 @@ class CreateChannel extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     createChannel: newChannel => dispatch(createChannel(newChannel)),
-    setErrors: () => dispatch(setErrors()),
     getChannels: () => dispatch(fetchChannels())
   };
 };

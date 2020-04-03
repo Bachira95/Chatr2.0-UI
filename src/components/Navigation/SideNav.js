@@ -16,7 +16,7 @@ import CreateChannel from "../CreateChannel";
 
 class SideNav extends React.Component {
   state = { collapsed: false, toggle: false };
-  toggelHandler() {
+  toggleHandler() {
     this.setState({ toggle: true });
   }
 
@@ -38,7 +38,7 @@ class SideNav extends React.Component {
             >
               <span
                 className="nav-link heading"
-                onClick={() => this.toggelHandler()}
+                onClick={() => this.toggleHandler()}
               >
                 {this.state.toggle ? (
                   <CreateChannel />
@@ -51,8 +51,16 @@ class SideNav extends React.Component {
                 )}
               </span>
             </li>
-
-            {channelLinks}
+            {/* <div>
+                    {" "}
+                    <span className="nav-link-text mr-2">Channels</span>
+                    <FontAwesomeIcon icon={faPlusCircle} />
+                  </div> */}
+            {!this.state.collapsed && (
+              <div className="scrollbar" id="style-1">
+                <div className="force-overflow">{channelLinks}</div>
+              </div>
+            )}
           </ul>
         )}
         <ul className="navbar-nav sidenav-toggler">

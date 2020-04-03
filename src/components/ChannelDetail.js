@@ -1,29 +1,37 @@
 import React, { Component } from "react";
 import { fetchMessages, sendMessage } from "../redux/actions";
 // Components
-
+import Message from "./Message";
 import { connect } from "react-redux";
-
+import { CLEAR_MESSAGES } from "../redux/actions/actionTypes";
 class ChannelDetail extends Component {
   state = {
     message: ""
   };
-  componentDidMount() {
+  SetLiveInterval() {
     this.myInterval = setInterval(() => {
-      this.props.getMessages(this.props.match.params.channelID);
+      const messages = this.props.messages;
+      let timestamp = "";
+      if (messages.length) timestamp = messages[messages.length - 1].timestamp;
+      this.props.getMessages(this.props.match.params.channelID, timestamp);
     }, 3000);
+  }
+  componentDidMount() {
+    this.SetLiveInterval();
   }
   componentWillUnmount() {
     clearInterval(this.myInterval);
   }
   componentDidUpdate(preProps) {
     if (this.props.match.params.channelID !== preProps.match.params.channelID) {
-      this.props.getMessages(this.props.match.params.channelID);
+      // this.props.getMessages(this.props.match.params.channelID);
+      this.props.clareMessages();
       clearInterval(this.myInterval);
+      this.SetLiveInterval();
     }
   }
 
-  ChangeHandler = e => this.setState({ [e.target.name]: e.target.value });
+  changeHandler = e => this.setState({ [e.target.name]: e.target.value });
 
   submitMessage = event => {
     event.preventDefault();
@@ -33,34 +41,12 @@ class ChannelDetail extends Component {
     }
   };
   render() {
-    const { channel } = this.props;
-    let messages = "";
+    const { messages } = this.props;
+    let messageList = "";
 
-    if (channel) {
-      messages = channel.map(msg => (
-        <div>
-          {" "}
-          <br></br>
-          {this.props.user.username !== msg.username ? (
-            <div
-              className="speech-bubble-ds"
-              style={{ width: 500, marginLeft: "270px" }}
-            >
-              <div className="card-body" key={msg.id}>
-                {msg.username} : {msg.message}
-              </div>
-            </div>
-          ) : (
-            <div
-              className="speech-bubble-ds-other"
-              style={{ width: 500, marginLeft: "300px" }}
-            >
-              <div className="card-body" key={msg.id}>
-                {msg.username} : {msg.message}
-              </div>
-            </div>
-          )}
-        </div>
+    if (messages) {
+      messageList = messages.map(msg => (
+        <Message msg={msg} username={this.props.user.username} keyid={msg.id} />
       ));
     }
 
@@ -70,13 +56,14 @@ class ChannelDetail extends Component {
         <div
           style={{
             overflowY: "scroll",
+            overflowX: "hidden",
             position: "relative",
             maxHeight: "500px",
             marginTop: "15px",
             opacity: 0.9
           }}
         >
-          {messages}
+          {messageList}
           <br></br>
         </div>
         <form onSubmit={this.submitMessage}>
@@ -92,7 +79,7 @@ class ChannelDetail extends Component {
                 marginLeft: "300px",
                 position: "center"
               }}
-              onChange={this.ChangeHandler}
+              onChange={this.changeHandler}
               value={this.state.message}
             />
             <button className="btn" type="button" onClick={this.submitMessage}>
@@ -110,14 +97,16 @@ class ChannelDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    channel: state.channelState.channel,
+    messages: state.channelState.messages,
     user: state.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getMessages: channelID => dispatch(fetchMessages(channelID)),
+    clareMessages: () => dispatch({ type: CLEAR_MESSAGES }),
+    getMessages: (channelID, timestamp) =>
+      dispatch(fetchMessages(channelID, timestamp)),
     sendMessage: (channelID, newMessage) =>
       dispatch(sendMessage(channelID, newMessage))
   };
