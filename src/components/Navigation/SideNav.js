@@ -26,7 +26,7 @@ class SideNav extends React.Component {
       channelLinks = this.props.channels.map(channel => (
         <ChannelNavLink key={channel.id} channel={channel} />
       ));
-    console.log(channelLinks);
+
     return (
       <div>
         {this.props.user && (
@@ -51,11 +51,7 @@ class SideNav extends React.Component {
                 )}
               </span>
             </li>
-            {/* <div>
-                    {" "}
-                    <span className="nav-link-text mr-2">Channels</span>
-                    <FontAwesomeIcon icon={faPlusCircle} />
-                  </div> */}
+
             {!this.state.collapsed && (
               <div className="scrollbar" id="style-1">
                 <div className="force-overflow">{channelLinks}</div>

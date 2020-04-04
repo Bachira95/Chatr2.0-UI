@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { createChannel, setErrors, fetchChannels } from "../redux/actions";
+import { createChannel, fetchChannels } from "../redux/actions";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";

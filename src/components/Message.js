@@ -22,9 +22,7 @@ const Message = ({ msg, username, keyid }) => {
           style={{ width: 500, marginLeft: "300px" }}
         >
           <div className="card-body">
-            {/* <font color="white"> */}
             {msg.username} : {msg.message}
-            {/* </font> */}
           </div>
         </div>
       )}

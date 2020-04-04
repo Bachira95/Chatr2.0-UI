@@ -6,13 +6,9 @@ import SideNav from "./SideNav";
 import AuthButton from "./AuthButton";
 
 const NavBar = () => (
-  <nav
-    className="navbar navbar-expand-lg navbar-dark fixed-top"
-    id="mainNav"
-    // style={{ backgroundColor: "#09323d", color: "#09323d" }}
-  >
+  <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <Link className="navbar-brand" to="/welcome">
-      Chatr2.0
+      TalkAtive
     </Link>
 
     <button

@@ -7,11 +7,6 @@ import { CLEAR_MESSAGES } from "../redux/actions/actionTypes";
 
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
-import {
-  faSmileBeam,
-  faArrowAltCircleDown
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class ChannelDetail extends Component {
   state = {
@@ -106,22 +101,25 @@ class ChannelDetail extends Component {
                 alt="send"
               />
             </button>
-            <div className="row ml-3">
-              <FontAwesomeIcon
-                icon={faSmileBeam}
-                onClick={() =>
-                  this.setState({ showemoji: !this.state.showemoji })
-                }
-                style={{ width: "40px", height: "40px", color: "yellow" }}
+            <button
+              className="btn"
+              type="button"
+              onClick={() =>
+                this.setState({ showemoji: !this.state.showemoji })
+              }
+            >
+              <img
+                src="https://img.icons8.com/nolan/60/butterfly.png"
+                alt="emoji"
               />
-            </div>
+            </button>
           </div>
           <div
             style={{
               float: "left",
               position: "absolute",
               zIndex: 9,
-              top: "200px",
+              top: "100px",
               right: "50px"
             }}
           >

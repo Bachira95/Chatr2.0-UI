@@ -1,10 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-// FontAwesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHashtag } from "@fortawesome/free-solid-svg-icons";
-
 const ChannelNavLink = ({ channel }) => (
   <li
     className="nav-item"
@@ -25,6 +21,7 @@ const ChannelNavLink = ({ channel }) => (
           src={channel.image_url}
           width="25"
           height="25"
+          alt={channel.name}
         />
       ) : (
         <img
@@ -32,6 +29,7 @@ const ChannelNavLink = ({ channel }) => (
           src="https://images.theconversation.com/files/319375/original/file-20200309-118956-1cqvm6j.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop"
           width="25"
           height="25"
+          alt="img_url"
         />
       )}
     </NavLink>

@@ -5,7 +5,6 @@ html {
 
 body {
   overflow-x: hidden;
-  /* background-image: url(https://wallpaperaccess.com/full/1567831.jpg); */
 }
 
 body.sticky-footer {
@@ -25,6 +24,10 @@ body.fixed-nav {
 .content-wrapper {
   min-height: calc(100vh - 56px);
   padding-top: 1rem;
+  font-family: "Oleo Script", cursive;
+  font-weight: normal;
+  line-height: 32px;
+  margin: 0 0 18px;
 }
 
 .scroll-to-top {
@@ -790,4 +793,22 @@ footer.sticky-footer {
   border-top-right-radius: 50% 50%;
   border-bottom-right-radius: 50% 50%;
   border-bottom-left-radius: 50% 50%;
+}
+
+card {
+  background: rgba(140, 33, 112, 0.7964227927499125);
+  border-radius: 2px;
+  border-width: 40px;
+  display: inline-block;
+  height: 300px;
+  margin: 1rem;
+  position: relative;
+  width: 300px;
+}
+.card-5 {
+  box-shadow: 0 10px 30px #09323d, 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.special-emoji {
+  background: linear-gradient(to right, #da70d6, #008b8b);
 }

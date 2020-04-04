@@ -3,22 +3,33 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 const Welcome = ({ user }) => {
   if (user) return <Redirect to="/private" />;
-
   return (
-    <header className="masthead d-flex">
-      <div className="container text-center my-auto z-1">
-        <h1 className="mb-1">WELCOME TO CHATR</h1>
-        <h3 className="mb-5">
-          <em>You're gonna need to login to see the messages</em>
-        </h3>
-        <Link to="/login" className="btn btn-primary btn-lg">
-          Login
+    <div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div class="card text-center">
+        <h3>Welcome to Sara & Qaddour TalkAtive Platform</h3>
+      </div>
+      <div
+        class="card text-center mt-3"
+        style={{ width: "30rem", marginLeft: "20rem" }}
+      >
+        <h4> Please Login to start</h4>
+      </div>
+      <div
+        class="card text-center mt-3 border-0 "
+        style={{ width: "10rem", marginLeft: "30rem" }}
+      >
+        <Link to="/login" className="btn special-button ">
+          <img
+            src="https://img.icons8.com/dusk/64/000000/enter-2.png"
+            alt="login"
+          />
         </Link>
       </div>
-      <div className="overlay z-0" />
-    </header>
+    </div>
   );
 };
 const mapStateToProps = ({ user }) => ({ user });
-
 export default connect(mapStateToProps)(Welcome);

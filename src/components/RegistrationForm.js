@@ -60,7 +60,10 @@ class RegistationForm extends Component {
               </div>
             </div>
             <button className="btn" type="submit">
-              <img src="https://img.icons8.com/nolan/64/enter-2.png" />
+              <img
+                src="https://img.icons8.com/nolan/64/enter-2.png"
+                alt="login"
+              />
             </button>
           </form>
         </div>
@@ -76,58 +79,6 @@ class RegistationForm extends Component {
         </div>
       </div>
     );
-    // return (
-    //   <div className="card col-6 mx-auto p-0 mt-5">
-    //     <div className="card-body">
-    //       <h5 className="card-title mb-4">
-    //         {type === "login"
-    //           ? "Login to send messages"
-    //           : "Register an account"}
-    //       </h5>
-    //       <form onSubmit={this.submitHandler}>
-    //         <div className="form-group ">
-    //           <div className="module-border-wrap rounded-pill">
-    //             <input
-    //               className={`form-control rounded-pill ${errors.username &&
-    //                 "is-invalid"}`}
-    //               type="text"
-    //               placeholder="Username"
-    //               name="username"
-    //               onChange={this.changeHandler}
-    //             />
-    //             <div className="invalid-feedback">{errors.username}</div>
-    //           </div>
-    //         </div>
-    //         <div className="form-group">
-    //           <div className="module-border-wrap rounded-pill">
-    //             <input
-    //               className={`form-control rounded-pill  ${errors.password &&
-    //                 "is-invalid"}`}
-    //               type="password"
-    //               placeholder="Password"
-    //               name="password"
-    //               onChange={this.changeHandler}
-    //             />
-    //             <div className="invalid-feedback">{errors.password}</div>
-    //           </div>
-    //         </div>
-    //         <button className="btn" type="submit">
-    //           <img src="https://img.icons8.com/nolan/64/enter-2.png" />
-    //         </button>
-    //       </form>
-    //     </div>
-    //     <div className="card-footer">
-    //       <Link
-    //         to={type === "login" ? "/signup" : "/login"}
-    //         className="btn btn-small btn-link"
-    //       >
-    //         {type === "login"
-    //           ? "register an account"
-    //           : "login with an existing account"}
-    //       </Link>
-    //     </div>
-    //   </div>
-    // );
   }
 }
 
