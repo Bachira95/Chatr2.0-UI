@@ -28,7 +28,7 @@ class App extends Component {
           <Route path="/private" component={SuperSecretPage} />
           <Route path="/createChannel/" component={CreateChannel} />
           <Route
-            path="/channels/:channelID/:channelName"
+            path="/channels/:channelID/:channelName/"
             component={ChannelDetail}
           />
 

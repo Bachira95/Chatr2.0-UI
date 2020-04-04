@@ -4,6 +4,15 @@ import { fetchMessages, sendMessage } from "../redux/actions";
 import Message from "./Message";
 import { connect } from "react-redux";
 import { CLEAR_MESSAGES } from "../redux/actions/actionTypes";
+
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
+import {
+  faSmileBeam,
+  faArrowAltCircleDown
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 class ChannelDetail extends Component {
   state = {
     message: ""
@@ -40,6 +49,14 @@ class ChannelDetail extends Component {
       this.setState({ message: "" });
     }
   };
+
+  // to handleEmoji
+  addEmoji = e => {
+    const message = this.state.message;
+    this.setState({ message: message + ` ${e.native}` });
+    this.setState({ showemoji: !this.state.showemoji });
+  };
+
   render() {
     const { messages } = this.props;
     let messageList = "";
@@ -52,13 +69,13 @@ class ChannelDetail extends Component {
 
     return (
       <div className="channel">
-        <h1 className="">## {this.props.match.params.channelName}</h1>
+        <h1>** {this.props.match.params.channelName}</h1>
         <div
           style={{
             overflowY: "scroll",
             overflowX: "hidden",
             position: "relative",
-            maxHeight: "500px",
+            maxHeight: "380px",
             marginTop: "15px",
             opacity: 0.9
           }}
@@ -67,8 +84,8 @@ class ChannelDetail extends Component {
           <br></br>
         </div>
         <form onSubmit={this.submitMessage}>
-          <div className="input-group mb-3">
-            <div className="input-group-prepend"></div>
+          <div className="input-group  mt-3">
+            <div className="input-group-prepend "></div>
             <input
               type="text"
               className="form-control"
@@ -82,12 +99,33 @@ class ChannelDetail extends Component {
               onChange={this.changeHandler}
               value={this.state.message}
             />
+
             <button className="btn" type="button" onClick={this.submitMessage}>
               <img
                 src="https://img.icons8.com/nolan/48/filled-sent.png"
                 alt="send"
               />
             </button>
+            <div className="row ml-3">
+              <FontAwesomeIcon
+                icon={faSmileBeam}
+                onClick={() =>
+                  this.setState({ showemoji: !this.state.showemoji })
+                }
+                style={{ width: "40px", height: "40px", color: "yellow" }}
+              />
+            </div>
+          </div>
+          <div
+            style={{
+              float: "left",
+              position: "absolute",
+              zIndex: 9,
+              top: "200px",
+              right: "50px"
+            }}
+          >
+            {this.state.showemoji ? <Picker onSelect={this.addEmoji} /> : ""}
           </div>
         </form>
       </div>

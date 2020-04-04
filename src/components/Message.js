@@ -11,7 +11,9 @@ const Message = ({ msg, username, keyid }) => {
           style={{ width: 500, marginLeft: "270px" }}
         >
           <div className="card-body">
-            {msg.username} : {msg.message}
+            <font color="white">
+              {msg.username} : {msg.message}
+            </font>
           </div>
         </div>
       ) : (
@@ -20,7 +22,9 @@ const Message = ({ msg, username, keyid }) => {
           style={{ width: 500, marginLeft: "300px" }}
         >
           <div className="card-body">
+            {/* <font color="white"> */}
             {msg.username} : {msg.message}
+            {/* </font> */}
           </div>
         </div>
       )}

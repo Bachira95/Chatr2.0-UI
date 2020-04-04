@@ -7,6 +7,7 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 class CreateChannel extends Component {
   state = {
     name: "",
+    image_url: "",
     toggal: false
   };
   // ADD imgURL whrn create channel
@@ -14,7 +15,10 @@ class CreateChannel extends Component {
   submitChannel = event => {
     event.preventDefault();
     if (this.state.name) {
-      this.props.createChannel({ name: this.state.name });
+      this.props.createChannel({
+        name: this.state.name,
+        image_url: this.state.image_url
+      });
 
       this.props.getChannels();
       this.setState({ name: "" });
@@ -35,14 +39,25 @@ class CreateChannel extends Component {
       <div className="container">
         <form onSubmit={this.submitChannel}>
           <div className="input-group mb-3">
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              onChange={this.changeHandler}
-              value={this.state.name}
-            />
-
+            <div className="row"></div>
+            <div className="col-11">
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                onChange={this.changeHandler}
+                value={this.state.name}
+                placeholder="Name"
+              />
+              <input
+                type="text"
+                className="form-control"
+                name="image_url"
+                onChange={this.changeHandler}
+                value={this.state.image_url}
+                placeholder="Image_URL"
+              />
+            </div>
             <button onClick={this.submitChannel}>
               <FontAwesomeIcon icon={faPlusCircle} />
             </button>

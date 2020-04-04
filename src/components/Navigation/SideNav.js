@@ -90,10 +90,5 @@ const mapStateToProps = state => {
     channels: state.channelsState.channels
   };
 };
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     getChannels: () => dispatch(fetchChannels())
-//   };
-// };
 
 export default connect(mapStateToProps)(SideNav);
